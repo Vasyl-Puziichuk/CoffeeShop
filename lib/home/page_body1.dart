@@ -67,12 +67,68 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         //секція з популярним
         SizedBox(height: Dimensions.height30,),
         Container(
-          margin: EdgeInsets.only(left: Dimensions.width30),
+         //color: Colors.redAccent,
+          margin: EdgeInsets.only(left: Dimensions.width30,),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: "Часто замовляють")
+              BigText(text: "Популярне"),
+              SizedBox(width: Dimensions.width10,),
+              Container(
+                margin: const EdgeInsets.only(bottom: 4),
+                child: BigText(text: ".", color:Colors.black26),
+              ),
+              SizedBox(width: Dimensions.width10,),
+              Container(
+                margin: const EdgeInsets.only(bottom: 1),
+                child: SmallText(text: "Поєднання"),
+              )
             ],
           ),
+        ),
+        //секція з кавою та картинками
+        Container(
+          //margin: EdgeInsets.only(bottom: 40),
+          //color: Colors.redAccent,
+          height: 900,
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            //shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (context, index){
+                return Container(
+                  //color: Colors.redAccent,
+                  margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,bottom: Dimensions.width10),
+                  child: Row(
+                    children: [
+                      //секція з картинками
+                      Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(Dimensions.radius20),
+                            color: Colors.white38,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/image/coffeetest.png"
+                                )
+                            )
+                        ),
+                      ),
+                      //текстові контейнери
+                      Container(
+                        height: 100,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Dimensions.radius20),
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
         )
 
       ],
@@ -114,7 +170,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           Container(
             height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+            margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10,),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius30),
                 color: index.isEven?Color(0xFF69c5df):Color(0xFF9294cc),

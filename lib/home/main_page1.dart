@@ -23,8 +23,8 @@ class _MainFoodPageState extends State<MainFoodPage> {
         children: [
           //Відображення шапки
           Container(
-
             child: Container(
+
               margin: EdgeInsets.only(top: Dimensions.height55, bottom: Dimensions.height15),
               padding: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),
               child: Row(
@@ -57,7 +57,9 @@ class _MainFoodPageState extends State<MainFoodPage> {
             ),
           ),
           //Відображення тіла головного вікна
-          FoodPageBody(),
+         Expanded(child: SingleChildScrollView(
+           child:  FoodPageBody(),
+         ))
         ],
       ),
     );
