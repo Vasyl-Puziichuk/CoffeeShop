@@ -103,7 +103,9 @@ class RecommendedFoodDetail extends StatelessWidget {
                     iconColor: Colors.white,
                     backgroundColor: AppColors.mainColor,
                     icon: Icons.remove),
-
+                BigText(text: "\$12.30 "+" X "+" 0 ",
+                  color: AppColors.mainBlackColor,
+                size:  Dimensions.font26),
                 AppIcon(
                     iconSize: Dimensions.iconSize28,
                     iconColor: Colors.white,
@@ -111,7 +113,49 @@ class RecommendedFoodDetail extends StatelessWidget {
                     icon: Icons.add),
               ],
             ),
-          )
+          ),
+          Container(
+            height: Dimensions.bottomHeightBar,
+            padding: EdgeInsets.only(top:Dimensions.height30,
+                bottom:Dimensions.height30, left: Dimensions.width20,
+                right: Dimensions.width20 ),
+            decoration: BoxDecoration(
+                color: AppColors.buttonBackgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(Dimensions.radius20*2),
+                  topRight: Radius.circular(Dimensions.radius20*2),
+                )
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: Dimensions.height20,
+                      bottom: Dimensions.height20, left:Dimensions.width20,
+                      right: Dimensions.height20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: Colors.white,
+                  ),
+                  child: Icon(
+                    Icons.favorite,
+                    color: AppColors.mainColor,
+                    //size: Dimensions.iconSize28,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: Dimensions.height20,
+                      bottom: Dimensions.height20, left:Dimensions.width20,
+                      right: Dimensions.height20),
+                  child: BigText(text: "\$10 | До кошика", color: Colors.white,),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
+                      color: AppColors.mainColor
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
