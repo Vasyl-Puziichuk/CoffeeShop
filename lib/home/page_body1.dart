@@ -87,13 +87,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
         //секція з кавою та картинками
-        Container(
-          //margin: EdgeInsets.only(bottom: 40),
-          //color: Colors.redAccent,
-          height: 900,
-          child: ListView.builder(
+           ListView.builder(
             physics: NeverScrollableScrollPhysics(),
-            //shrinkWrap: true,
+            shrinkWrap: true,
               itemCount: 10,
               itemBuilder: (context, index){
                 return Container(
@@ -103,8 +99,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     children: [
                       //секція з картинками
                       Container(
-                        width: 120,
-                        height: 120,
+                        width: Dimensions.listViewImgSize,
+                        height: Dimensions.listViewImgSize,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(Dimensions.radius20),
                             color: Colors.white38,
@@ -117,19 +113,50 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         ),
                       ),
                       //текстові контейнери
-                      Container(
-                        height: 100,
-                        width: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Dimensions.radius20),
-                          color: Colors.white,
+                      Expanded(
+                        child: Container(
+                          height: Dimensions.listViewTextContSize,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius20),
+                              bottomRight: Radius.circular(Dimensions.radius20),
+                            ),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                BigText(text: "Сніданок меню 2"),
+                                SizedBox(height: Dimensions.height10,),
+                                SmallText(text: "Те, що сподобається кожному"),
+                                SizedBox(height: Dimensions.height10,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconAndTextWidget(icon: Icons.circle_sharp,
+                                        text: "Normal",
+                                        iconColor: AppColors.iconColor1),
+                                    IconAndTextWidget(icon: Icons.location_on,
+                                        text: "2 km",
+                                        iconColor: AppColors.mainColor),
+                                    IconAndTextWidget(icon: Icons.access_time_rounded,
+                                        text: "24 min",
+                                        iconColor: AppColors.iconColor2)
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       )
                     ],
                   ),
                 );
               }),
-        )
+
 
       ],
     );

@@ -32,4 +32,8 @@ class Dimensions{
   //розміри іконок
   static double iconSize28 = screenHeight/35;
 
+  //Розміри для відображення картинок з текстом
+  static double listViewImgSize = screenWidth/3.55;
+  static double listViewTextContSize = screenWidth/4.2;
+
 }
