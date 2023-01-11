@@ -8,6 +8,7 @@ import '../../untils/colors.dart';
 import '../../widgets/big_taxt.dart';
 import '../../widgets/icon&text_widget.dart';
 import '../../widgets/small_text.dart';
+import '../../widgets/exandable_text_widgets.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   const PopularFoodDetail({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          //Фонова картинка
           Positioned(
             left: 0,
               right: 0,
@@ -33,6 +35,7 @@ class PopularFoodDetail extends StatelessWidget {
                   )
                 ),
               )),
+          //Іконки
           Positioned(
             top: Dimensions.height55,
             left: Dimensions.width20,
@@ -44,6 +47,7 @@ class PopularFoodDetail extends StatelessWidget {
                   AppIcon(icon: Icons.shopping_cart_checkout_outlined),
                 ],
               )),
+          //Блок з описом
           Positioned(
               left: 0,
               right: 0,
@@ -65,10 +69,22 @@ class PopularFoodDetail extends StatelessWidget {
                   children: [
                     AppColumn(text: "Mr. Expresso",),
                     SizedBox(height: Dimensions.height20,),
-                    BigText(text: "Описання")
+                    BigText(text: "Описання"),
+                    SizedBox(height: Dimensions.height20,),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: ExpandableTextWidget(text: "Процес приготування еспресо називається екстракцією та передбачає вивільнення під впливом поданої під тиском гарячої води твердих розчинних та нерозчинних речовин, а також летких ароматичних сполук. Перші формують щільність, смак і міцність отриманого напою, а другі своєю чергою надають йому характерний аромат."
+                            "Насправді відсутні якісь узагальнені стандарти приготування еспресо. Проте в широкому сенсі діапазон змінних при приготуванні еспресо коливається в рамках наступних значень:"
+                            "vdfgbdfohodifjoidfvifdnviundfo iubdiuvnuhdfbviudbuvnduyvbuidbvyuhduvbdyuvbuydbvudbyuvdibv8idnvudbiu"
+                            "Важливим моментом приготування смачного еспресо є правильний темпінг кавової таблетки, яка формується в портофільтрі. Завдання бариста полягає в тому, щоб затемпінгована кавова таблетка  dgvdffdgdfdsfsdf fgdfg dgdg fdgdf fdgbdf"
+                ),
+                      ),
+                    )
                   ],
                 ),
-              ))
+              )),
+          //Віджет з описом
+          
         ],
       ),
       bottomNavigationBar: Container(

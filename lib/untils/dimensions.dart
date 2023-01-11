@@ -24,6 +24,7 @@ class Dimensions{
   static double width30=screenHeight/28.45;//41
 
   //Розміри шрифта
+  static double font16=screenHeight/53;
   static double font20=screenHeight/42.52;
   static double font26=screenHeight/32.45;
 
