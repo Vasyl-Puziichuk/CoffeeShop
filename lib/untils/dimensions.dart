@@ -31,9 +31,14 @@ class Dimensions{
 
   //розміри іконок
   static double iconSize28 = screenHeight/35;
+  static double iconSize22 = screenHeight/38;
+
 
   //Розміри для відображення картинок з текстом
   static double listViewImgSize = screenWidth/3.55;
   static double listViewTextContSize = screenWidth/4.2;
+
+  //популярні замовлення
+static double popularFoodImgSize=screenHeight/2.7;
 
 }
