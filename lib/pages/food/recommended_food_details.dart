@@ -103,7 +103,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     iconColor: Colors.white,
                     backgroundColor: AppColors.mainColor,
                     icon: Icons.remove),
-                BigText(text: "\$12.30 "+" X "+" 0 ",
+                BigText(text: "\₴12.30 "+" X "+" 0 ",
                   color: AppColors.mainBlackColor,
                 size:  Dimensions.font26),
                 AppIcon(
@@ -147,7 +147,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   padding: EdgeInsets.only(top: Dimensions.height20,
                       bottom: Dimensions.height20, left:Dimensions.width20,
                       right: Dimensions.height20),
-                  child: BigText(text: "\$10 | До кошика", color: Colors.white,),
+                  child: BigText(text: "\₴10 | До кошика", color: Colors.white,),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius20),
                       color: AppColors.mainColor

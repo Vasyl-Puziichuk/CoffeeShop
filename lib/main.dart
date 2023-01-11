@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import 'package:testappfirst/home/main_page1.dart';
 import 'package:testappfirst/pages/food/popular_details.dart';
 import 'package:testappfirst/pages/food/recommended_food_details.dart';
+import 'helper/dependencies.dart' as dep;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
