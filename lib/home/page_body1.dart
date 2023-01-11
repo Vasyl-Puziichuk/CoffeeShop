@@ -6,6 +6,7 @@ import 'package:testappfirst/widgets/big_taxt.dart';
 import 'package:testappfirst/widgets/icon&text_widget.dart';
 import 'package:testappfirst/widgets/small_text.dart';
 import 'package:testappfirst/untils/dimensions.dart';
+import 'package:testappfirst/widgets/app_column.dart';
 
 
 class FoodPageBody extends StatefulWidget {
@@ -237,45 +238,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(top: Dimensions.height15, left: 15, right: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: "Mr. Expresso"),
-                    //коментарі
-                    SizedBox(height: Dimensions.height10,),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(5, (index) {
-                            return Icon(Icons.star,
-                          color: AppColors.mainColor, size: 15,);})
-                        ),
-                        SizedBox(width: 10, ),
-                        SmallText(text: "4.5"),
-                        SizedBox(width: 10,),
-                        SmallText(text: "914"),
-                        SizedBox(width: 10,),
-                        SmallText(text: "comments")
-                      ],
-                    ),
-                    //локація
-                    SizedBox(height: Dimensions.height20,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                          IconAndTextWidget(icon: Icons.circle_sharp,
-                              text: "Normal",
-                              iconColor: AppColors.iconColor1),
-                        IconAndTextWidget(icon: Icons.location_on,
-                            text: "2 km",
-                            iconColor: AppColors.mainColor),
-                        IconAndTextWidget(icon: Icons.access_time_rounded,
-                            text: "24 min",
-                            iconColor: AppColors.iconColor2)
-                      ],
-                    )
-                  ],
-                ),
+                child: AppColumn(text: "Mr. Expresso",),
               ),
 
             ),

@@ -23,7 +23,10 @@ class Dimensions{
   static double width20=screenHeight/42.52;//41
   static double width30=screenHeight/28.45;//41
 
+  //Розміри шрифта
   static double font20=screenHeight/42.52;
+  static double font26=screenHeight/32.45;
+
 
   static double radius15=screenHeight/56.6;
   static double radius20=screenHeight/42.52;
@@ -39,6 +42,9 @@ class Dimensions{
   static double listViewTextContSize = screenWidth/4.2;
 
   //популярні замовлення
-static double popularFoodImgSize=screenHeight/2.7;
+  static double popularFoodImgSize=screenHeight/2.7;
+
+  //Висота нижнього меню
+  static double bottomHeightBar=screenHeight/7.08;
 
 }
