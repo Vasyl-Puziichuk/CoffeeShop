@@ -41,11 +41,11 @@ class PopularProductController extends GetxController{
 
   void setQuantity(bool isIncrement){
     if(isIncrement){
-      print("it is increment "+_quantity.toString());
+      //print("it is increment "+_quantity.toString());
       _quantity=checkQuantity(_quantity+1);
     }
     else{
-      print("it is decrement "+_quantity.toString());
+      //print("it is decrement "+_quantity.toString());
       _quantity=checkQuantity(_quantity-1);
     }
     update();
@@ -68,16 +68,34 @@ class PopularProductController extends GetxController{
     }
   }
 
-  void initProduct(CartController cart){
+  void initProduct(ProductModel product, CartController cart){
     _quantity=0;
     _inCartItems=0;
     _cart=cart;
-
+    var exist=false;
+    exist=_cart.existInCart(product);
     //if exist
     //get from storage _inCartItems=3
+    print("exist or not "+exist.toString());
+    if(exist){
+      _inCartItems=cart.getQuantity(product);
+    }
+    print("Quantity in the cart is "+_inCartItems.toString());
   }
 
   void addItem(ProductModel product ){
-    _cart.addItem(product, quantity);
+    if(_quantity>0) {
+      _cart.addItem(product, quantity);
+      _quantity=0;
+      _cart.items.forEach((key, value) {
+        print("The id is "+value.id.toString()+" The quantity is "
+            +value.quantity.toString());
+      });
+    }
+    else{
+      Get.snackbar("Кількість", "Додайте хоча б один товар до кошика!",
+        backgroundColor: AppColors.mainColor,
+        colorText: Colors.white,);
+    }
   }
 }

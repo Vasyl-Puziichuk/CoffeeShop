@@ -25,7 +25,7 @@ class PopularFoodDetail extends StatelessWidget {
     var product=Get.find<PopularProductController>().popularProductList[pageId];
     //print("page is id "+pageId.toString());
     //print("product name is "+product.name.toString());
-    Get.find<PopularProductController>().initProduct(Get.find<CartController>());
+    Get.find<PopularProductController>().initProduct(product,Get.find<CartController>());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -146,7 +146,11 @@ class PopularFoodDetail extends StatelessWidget {
                 padding: EdgeInsets.only(top: Dimensions.height20,
                     bottom: Dimensions.height20, left:Dimensions.width20,
                     right: Dimensions.height20),
-                child: BigText(text: "\₴ ${product.price!} | До кошика", color: Colors.white,),
+                child: GestureDetector(
+                  onTap: (){
+                    popularProduct.addItem(product);
+                  },
+                    child: BigText(text: "\₴ ${product.price!} | До кошика", color: Colors.white,)),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: AppColors.mainColor
