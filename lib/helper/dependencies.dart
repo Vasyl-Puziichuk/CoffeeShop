@@ -8,6 +8,7 @@ import '../../untils/app_constants.dart';
 Future<void> init()async{
   //api client
   Get.lazyPut(()=>ApiClient(appBaseUrl: AppConstants.BASE_URL));
+  //"http://mvs.bslmeiyu.com";
 
   //repos
   Get.lazyPut(()=>PopularProductRepo(apiClient: Get.find()));

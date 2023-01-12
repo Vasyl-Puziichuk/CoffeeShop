@@ -1,12 +1,14 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 import 'package:testappfirst/widgets/icon&text_widget.dart';
 import 'package:testappfirst/widgets/small_text.dart';
 import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/app_column.dart';
+import '../controllers/popular_product_contr.dart';
 
 
 class FoodPageBody extends StatefulWidget {
@@ -43,19 +45,23 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         //секція слайдера
-      Container(
-      //color: Colors.redAccent,
-      height: Dimensions.pageView,
-      child: PageView.builder(
-          controller: pageController,
-          itemCount: 5,
-          itemBuilder: (context, position){
-            return _buildPageItem(position);
-          }),
-    ),
+      GetBuilder<PopularProductController>(builder: (popularProducts){
+        return Container(
+          //color: Colors.redAccent,
+          height: Dimensions.pageView,
+          child: PageView.builder(
+              controller: pageController,
+              itemCount: popularProducts.popularProductList.length,
+              itemBuilder: (context, position){
+                return _buildPageItem(position);
+              }),
+        );
+      }),
+
         //показник слайду
-        new DotsIndicator(
-            dotsCount: 5,
+        GetBuilder<PopularProductController>(builder: (popularProducts){
+          return DotsIndicator(
+            dotsCount: popularProducts.popularProductList.length,
             position: _currPageValue,
             decorator: DotsDecorator(
               activeColor: AppColors.mainColor,
@@ -63,8 +69,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               activeSize: const Size(18.0, 9.0),
               activeShape: RoundedRectangleBorder(borderRadius:
               BorderRadius.circular(5.0)),
-          ),
-        ),
+            ),
+          );
+        }),
+
         //секція з популярним
         SizedBox(height: Dimensions.height30,),
         Container(
@@ -87,6 +95,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
+
         //секція з кавою та картинками
            ListView.builder(
             physics: NeverScrollableScrollPhysics(),
