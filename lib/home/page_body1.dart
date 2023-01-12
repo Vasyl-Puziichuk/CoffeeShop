@@ -106,7 +106,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
              return recommendedProduct.isLoaded?ListView.builder(
                  physics: NeverScrollableScrollPhysics(),
                  shrinkWrap: true,
-                 itemCount: 10,
+                 itemCount: recommendedProduct.recommendedProductList.length,
                  itemBuilder: (context, index){
                    return Container(
                      //color: Colors.redAccent,
@@ -122,8 +122,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                color: Colors.white38,
                                image: DecorationImage(
                                    fit: BoxFit.cover,
-                                   image: AssetImage(
-                                       "assets/image/coffeetest.png"
+                                   image: NetworkImage(
+                                       AppConstants.BASE_URL+AppConstants.UPLOAD_URL+recommendedProduct.recommendedProductList[index].img!
                                    )
                                )
                            ),
@@ -145,7 +145,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  mainAxisAlignment: MainAxisAlignment.center,
                                  children: [
-                                   BigText(text: "Сніданок меню 2"),
+                                   BigText(text: recommendedProduct.recommendedProductList[index].name!),
                                    SizedBox(height: Dimensions.height10,),
                                    SmallText(text: "Те, що сподобається кожному"),
                                    SizedBox(height: Dimensions.height10,),
@@ -224,7 +224,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        AppConstants.BASE_URL+"/uploads/"+popularProduct.img!
+                        AppConstants.BASE_URL+AppConstants.UPLOAD_URL+popularProduct.img!
                     )
                 )
             ),
