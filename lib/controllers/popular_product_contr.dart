@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testappfirst/controllers/cart_controller.dart';
 import 'package:testappfirst/data/repository/popular_product_repo.dart';
 import 'package:testappfirst/untils/app_constants.dart';
 
@@ -11,6 +12,7 @@ class PopularProductController extends GetxController{
   PopularProductController({required this.popularProductRepo});
   List<dynamic> _popularProductList=[];
   List<dynamic>  get popularProductList =>_popularProductList;
+  late CartController _cart;
 
   bool _isLoaded =false;
   bool  get isLoaded=>_isLoaded;
@@ -18,12 +20,14 @@ class PopularProductController extends GetxController{
   int _quantity=0;
   int get quantity=>_quantity;
   //{return _quantity;}
+  int _inCartItems=0;
+  int get inCartItems=>_inCartItems+_quantity;
 
   Future<void> getPopularProductList()async {
     Response response = await popularProductRepo.getPopularProductList();
     if(response.statusCode==200){
 
-      print("got products OK");
+     // print("got products OK");
       _popularProductList=[];
       _popularProductList.addAll(Product.fromJson(response.body).products);
      // print(_popularProductList);
@@ -62,5 +66,18 @@ class PopularProductController extends GetxController{
     else{
       return quantity;
     }
+  }
+
+  void initProduct(CartController cart){
+    _quantity=0;
+    _inCartItems=0;
+    _cart=cart;
+
+    //if exist
+    //get from storage _inCartItems=3
+  }
+
+  void addItem(ProductModel product ){
+    _cart.addItem(product, quantity);
   }
 }
