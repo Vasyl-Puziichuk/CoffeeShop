@@ -47,7 +47,7 @@ class PopularFoodDetail extends StatelessWidget {
                   )
                 ),
               )),
-          //Іконки
+          //Іконки назад і кошик
           Positioned(
             top: Dimensions.height55,
             left: Dimensions.width20,
@@ -59,8 +59,20 @@ class PopularFoodDetail extends StatelessWidget {
                     onTap:(){
                       Get.to(()=>MainFoodPage());
                       },
-                      child: AppIcon(icon: Icons.arrow_back)),
-                  AppIcon(icon: Icons.shopping_cart_checkout_outlined),
+                      child: AppIcon(icon: Icons.arrow_back)
+                  ),
+                 GetBuilder<PopularProductController>(builder: (controller){
+                   return Stack(
+                     children: [
+                       AppIcon(icon: Icons.shopping_cart_checkout_outlined),
+                       Get.find<PopularProductController>().totalItems>=1?
+                          AppIcon(icon: Icons.circle, size: 20,
+                            iconColor: Colors.transparent,
+                            backgroundColor: AppColors.mainColor,):
+                              Container()
+                     ],
+                   );
+                 })
                 ],
               )),
           //Блок з описом
