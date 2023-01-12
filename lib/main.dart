@@ -6,6 +6,7 @@ import 'package:testappfirst/home/main_page1.dart';
 import 'package:testappfirst/pages/food/popular_details.dart';
 import 'package:testappfirst/pages/food/recommended_food_details.dart';
 import 'helper/dependencies.dart' as dep;
+import 'home/page_body1.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: RecommendedFoodDetail(),
+      home: MainFoodPage(),
     );
   }
 }
