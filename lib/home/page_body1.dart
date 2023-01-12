@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testappfirst/controllers/recommended_product_contr.dart';
 import 'package:testappfirst/models/popular_products_model.dart';
+import 'package:testappfirst/pages/food/popular_details.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 import 'package:testappfirst/widgets/icon&text_widget.dart';
@@ -11,6 +12,7 @@ import 'package:testappfirst/widgets/small_text.dart';
 import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/app_column.dart';
 import '../controllers/popular_product_contr.dart';
+import '../routes/route_helper.dart';
 import '../untils/app_constants.dart';
 
 
@@ -52,12 +54,17 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         return popularProducts.isLoaded?Container(
           //color: Colors.redAccent,
           height: Dimensions.pageView,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: popularProducts.popularProductList.length,
-              itemBuilder: (context, position){
-                return _buildPageItem(position, popularProducts.popularProductList[position]);
-              }),
+          child: GestureDetector(
+            onTap: (){
+              Get.toNamed(RouteHelper.popularFood);
+            },
+            child: PageView.builder(
+                controller: pageController,
+                itemCount: popularProducts.popularProductList.length,
+                itemBuilder: (context, position){
+                  return _buildPageItem(position, popularProducts.popularProductList[position]);
+                }),
+          ),
         ):CircularProgressIndicator(
           color: AppColors.mainColor,
         );
