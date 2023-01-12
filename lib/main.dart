@@ -5,6 +5,7 @@ import 'package:testappfirst/controllers/popular_product_contr.dart';
 import 'package:testappfirst/home/main_page1.dart';
 import 'package:testappfirst/pages/food/popular_details.dart';
 import 'package:testappfirst/pages/food/recommended_food_details.dart';
+import 'controllers/recommended_product_contr.dart';
 import 'helper/dependencies.dart' as dep;
 import 'home/page_body1.dart';
 
@@ -21,7 +22,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    Get.find<PopularProductController>().getPopularProductList();
-    return GetMaterialApp(
+   Get.find<RecommendedProductController>().getRecommendedProductList();
+
+   return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

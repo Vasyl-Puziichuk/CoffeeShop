@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testappfirst/controllers/recommended_product_contr.dart';
 import 'package:testappfirst/models/popular_products_model.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
@@ -48,7 +49,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         //секція слайдера
       GetBuilder<PopularProductController>(builder: (popularProducts){
-        return Container(
+        return popularProducts.isLoaded?Container(
           //color: Colors.redAccent,
           height: Dimensions.pageView,
           child: PageView.builder(
@@ -57,6 +58,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               itemBuilder: (context, position){
                 return _buildPageItem(position, popularProducts.popularProductList[position]);
               }),
+        ):CircularProgressIndicator(
+          color: AppColors.mainColor,
         );
       }),
 
@@ -83,7 +86,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: "Популярне"),
+              BigText(text: "Рекомендації"),
               SizedBox(width: Dimensions.width10,),
               Container(
                 margin: const EdgeInsets.only(bottom: 4),
@@ -99,75 +102,80 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
 
         //секція з кавою та картинками
-           ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (context, index){
-                return Container(
-                  //color: Colors.redAccent,
-                  margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,bottom: Dimensions.width10),
-                  child: Row(
-                    children: [
-                      //секція з картинками
-                      Container(
-                        width: Dimensions.listViewImgSize,
-                        height: Dimensions.listViewImgSize,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(Dimensions.radius20),
-                            color: Colors.white38,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                                image: AssetImage(
-                                    "assets/image/coffeetest.png"
-                                )
-                            )
-                        ),
-                      ),
-                      //текстові контейнери
-                      Expanded(
-                        child: Container(
-                          height: Dimensions.listViewTextContSize,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(Dimensions.radius20),
-                              bottomRight: Radius.circular(Dimensions.radius20),
-                            ),
-                            color: Colors.white,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                BigText(text: "Сніданок меню 2"),
-                                SizedBox(height: Dimensions.height10,),
-                                SmallText(text: "Те, що сподобається кожному"),
-                                SizedBox(height: Dimensions.height10,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    IconAndTextWidget(icon: Icons.circle_sharp,
-                                        text: "Normal",
-                                        iconColor: AppColors.iconColor1),
-                                    IconAndTextWidget(icon: Icons.location_on,
-                                        text: "2 km",
-                                        iconColor: AppColors.mainColor),
-                                    IconAndTextWidget(icon: Icons.access_time_rounded,
-                                        text: "24 min",
-                                        iconColor: AppColors.iconColor2)
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              }),
+           GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
+             return recommendedProduct.isLoaded?ListView.builder(
+                 physics: NeverScrollableScrollPhysics(),
+                 shrinkWrap: true,
+                 itemCount: 10,
+                 itemBuilder: (context, index){
+                   return Container(
+                     //color: Colors.redAccent,
+                     margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,bottom: Dimensions.width10),
+                     child: Row(
+                       children: [
+                         //секція з картинками
+                         Container(
+                           width: Dimensions.listViewImgSize,
+                           height: Dimensions.listViewImgSize,
+                           decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(Dimensions.radius20),
+                               color: Colors.white38,
+                               image: DecorationImage(
+                                   fit: BoxFit.cover,
+                                   image: AssetImage(
+                                       "assets/image/coffeetest.png"
+                                   )
+                               )
+                           ),
+                         ),
+                         //текстові контейнери
+                         Expanded(
+                           child: Container(
+                             height: Dimensions.listViewTextContSize,
+                             decoration: BoxDecoration(
+                               borderRadius: BorderRadius.only(
+                                 topRight: Radius.circular(Dimensions.radius20),
+                                 bottomRight: Radius.circular(Dimensions.radius20),
+                               ),
+                               color: Colors.white,
+                             ),
+                             child: Padding(
+                               padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   BigText(text: "Сніданок меню 2"),
+                                   SizedBox(height: Dimensions.height10,),
+                                   SmallText(text: "Те, що сподобається кожному"),
+                                   SizedBox(height: Dimensions.height10,),
+                                   Row(
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       IconAndTextWidget(icon: Icons.circle_sharp,
+                                           text: "Normal",
+                                           iconColor: AppColors.iconColor1),
+                                       IconAndTextWidget(icon: Icons.location_on,
+                                           text: "2 km",
+                                           iconColor: AppColors.mainColor),
+                                       IconAndTextWidget(icon: Icons.access_time_rounded,
+                                           text: "24 min",
+                                           iconColor: AppColors.iconColor2)
+                                     ],
+                                   )
+                                 ],
+                               ),
+                             ),
+                           ),
+                         )
+                       ],
+                     ),
+                   );
+                 })
+                 :CircularProgressIndicator(
+               color: AppColors.mainColor,
+             );
+           }),
 
 
       ],
@@ -249,7 +257,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(top: Dimensions.height15, left: 15, right: 15),
-                child: AppColumn(text: "Mr. Expresso",),
+                child: AppColumn(text: popularProduct.name!),
               ),
 
             ),
