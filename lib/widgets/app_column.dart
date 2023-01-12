@@ -36,10 +36,12 @@ class AppColumn extends StatelessWidget {
             ],
           ),
           //локація
-          SizedBox(height: Dimensions.height20,),
+          SizedBox(height: Dimensions.height15,),
           Row(
+
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+
               IconAndTextWidget(icon: Icons.circle_sharp,
                   text: "Normal",
                   iconColor: AppColors.iconColor1),
