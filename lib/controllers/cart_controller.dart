@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testappfirst/models/popular_products_model.dart';
 
 import '../data/repository/cart_repo.dart';
 import '../models/cart_model.dart';
+import '../untils/colors.dart';
 
 class CartController extends GetxController{
   final CartRepo cartRepo;
@@ -27,17 +29,24 @@ class CartController extends GetxController{
       });
     }
     else{
-      _items.putIfAbsent(product.id!, (){
-        return CartModel(
-          id:product.id,
-          name: product.name,
-          price:product.price,
-          img:product.img,
-          quantity:quantity,
-          isExist:true,
-          time:DateTime.now().toString(),
-        );}
-      );
+      if(quantity>0){
+        _items.putIfAbsent(product.id!, (){
+          return CartModel(
+            id:product.id,
+            name: product.name,
+            price:product.price,
+            img:product.img,
+            quantity:quantity,
+            isExist:true,
+            time:DateTime.now().toString(),
+          );}
+        );
+      }
+      else{
+        Get.snackbar("Кількість", "Додайте хоча б один товар до кошика!",
+            backgroundColor: AppColors.mainColor,
+            colorText: Colors.white,);
+      }
     }
 
   }
