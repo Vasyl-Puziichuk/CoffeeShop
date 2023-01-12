@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:testappfirst/controllers/popular_product_contr.dart';
 import 'package:testappfirst/home/main_page1.dart';
+import 'package:testappfirst/untils/app_constants.dart';
 import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/app_icon.dart';
 import 'package:testappfirst/widgets/app_column.dart';
@@ -13,10 +15,16 @@ import '../../widgets/small_text.dart';
 import '../../widgets/exandable_text_widgets.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  PopularFoodDetail({Key? key,
+    required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product=Get.find<PopularProductController>().popularProductList[pageId];
+    //print("page is id "+pageId.toString());
+    //print("product name is "+product.name.toString());
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -31,9 +39,9 @@ class PopularFoodDetail extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(
-                      "assets/image/coffeeshop4.jpg"
-                    )
+                    image: NetworkImage(
+                      AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!
+                    ),
                   )
                 ),
               )),
@@ -73,17 +81,14 @@ class PopularFoodDetail extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppColumn(text: "Mr. Expresso",),
+                    AppColumn(text: product.name!),
                     SizedBox(height: Dimensions.height20,),
                     BigText(text: "Описання"),
                     SizedBox(height: Dimensions.height20,),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: ExpandableTextWidget(text: "Процес приготування еспресо називається екстракцією та передбачає вивільнення під впливом поданої під тиском гарячої води твердих розчинних та нерозчинних речовин, а також летких ароматичних сполук. Перші формують щільність, смак і міцність отриманого напою, а другі своєю чергою надають йому характерний аромат."
-                            "Насправді відсутні якісь узагальнені стандарти приготування еспресо. Проте в широкому сенсі діапазон змінних при приготуванні еспресо коливається в рамках наступних значень:"
-                            "vdfgbdfohodifjoidfvifdnviundfo iubdiuvnuhdfbviudbuvnduyvbuidbvyuhduvbdyuvbuydbvudbyuvdibv8idnvudbiu"
-                            "Важливим моментом приготування смачного еспресо є правильний темпінг кавової таблетки, яка формується в портофільтрі. Завдання бариста полягає в тому, щоб затемпінгована кавова таблетка  dgvdffdgdfdsfsdf fgdfg dgdg fdgdf fdgbdf"
-                ),
+                        child: ExpandableTextWidget(
+                            text:product.description!),
                       ),
                     )
                   ],
@@ -130,7 +135,7 @@ class PopularFoodDetail extends StatelessWidget {
               padding: EdgeInsets.only(top: Dimensions.height20,
                   bottom: Dimensions.height20, left:Dimensions.width20,
                   right: Dimensions.height20),
-              child: BigText(text: "\$10 | До кошика", color: Colors.white,),
+              child: BigText(text: "\$ ${product.price!} | До кошика", color: Colors.white,),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
                 color: AppColors.mainColor
