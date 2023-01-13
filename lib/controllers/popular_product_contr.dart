@@ -4,6 +4,7 @@ import 'package:testappfirst/controllers/cart_controller.dart';
 import 'package:testappfirst/data/repository/popular_product_repo.dart';
 import 'package:testappfirst/untils/app_constants.dart';
 
+import '../models/cart_model.dart';
 import '../models/popular_products_model.dart';
 import '../untils/colors.dart';
 
@@ -55,6 +56,10 @@ class PopularProductController extends GetxController{
       Get.snackbar("Кількість", "Більше не зменшиться!",
       backgroundColor: AppColors.mainColor,
       colorText: Colors.white,);
+      if(_inCartItems>0){
+        _quantity=-_inCartItems;
+        return _quantity;
+      }
       return 0;
     }
     else if((_inCartItems+quantity)>20){
@@ -105,6 +110,10 @@ class PopularProductController extends GetxController{
 
   int get totalItems{
     return _cart.totalItems;
+  }
+
+  List<CartModel> get getItems{
+    return _cart.getItems;
   }
 
 }
