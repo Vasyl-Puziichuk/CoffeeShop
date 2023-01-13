@@ -100,6 +100,7 @@ class PopularProductController extends GetxController{
     //     backgroundColor: AppColors.mainColor,
     //     colorText: Colors.white,);
     // }
+    update();
   }
 
   int get totalItems{
