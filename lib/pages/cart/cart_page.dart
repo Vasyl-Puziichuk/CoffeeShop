@@ -114,6 +114,7 @@ class CartPage extends StatelessWidget {
                                                     GestureDetector(
                                                         onTap: (){
                                                           //popularProduct.setQuantity(false);
+                                                          cartControlle.addItem(_cartList[index].product!, -1);
                                                         },
                                                         child: Icon(Icons.remove, color: AppColors.signColor,)),
                                                     SizedBox(width: Dimensions.width10/2,),
@@ -122,6 +123,8 @@ class CartPage extends StatelessWidget {
                                                     GestureDetector(
                                                         onTap: (){
                                                           //popularProduct.setQuantity(true);
+                                                          cartControlle.addItem(_cartList[index].product!, 1);
+                                                          print("tap tap");
                                                         },
                                                         child: Icon(Icons.add, color: AppColors.signColor,)),
                                                   ],
