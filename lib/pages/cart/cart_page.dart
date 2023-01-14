@@ -63,8 +63,9 @@ class CartPage extends StatelessWidget {
                   context: context,
                   removeTop: true,
                   child: GetBuilder<CartController>(builder: (cartControlle){
+                    var _cartList= cartControlle.getItems;
                     return ListView.builder(
-                        itemCount: cartControlle.getItems.length,
+                        itemCount: _cartList.length,
                         itemBuilder: (_, index){
                           return Container(
                             width: double.maxFinite,
@@ -116,7 +117,7 @@ class CartPage extends StatelessWidget {
                                                         },
                                                         child: Icon(Icons.remove, color: AppColors.signColor,)),
                                                     SizedBox(width: Dimensions.width10/2,),
-                                                    BigText(text: "0"),//popularProduct.inCartItems.toString()),
+                                                    BigText(text: _cartList[index].quantity.toString()),//popularProduct.inCartItems.toString()),
                                                     SizedBox(width: Dimensions.width10/2,),
                                                     GestureDetector(
                                                         onTap: (){
