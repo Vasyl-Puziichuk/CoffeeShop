@@ -9,11 +9,13 @@ import 'package:testappfirst/widgets/app_icon.dart';
 import 'package:testappfirst/widgets/app_column.dart';
 import 'package:get/get.dart';
 
+import '../../routes/route_helper.dart';
 import '../../untils/colors.dart';
 import '../../widgets/big_taxt.dart';
 import '../../widgets/icon&text_widget.dart';
 import '../../widgets/small_text.dart';
 import '../../widgets/exandable_text_widgets.dart';
+import '../cart/cart_page.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
@@ -57,6 +59,7 @@ class PopularFoodDetail extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap:(){
+
                       Get.to(()=>MainFoodPage());
                       },
                       child: AppIcon(icon: Icons.arrow_back)
@@ -68,9 +71,14 @@ class PopularFoodDetail extends StatelessWidget {
                        Get.find<PopularProductController>().totalItems>=1?
                           Positioned(
                             right:0, top:0,
-                            child: AppIcon(icon: Icons.circle, size: 20,
-                              iconColor: Colors.transparent,
-                              backgroundColor: AppColors.mainColor,),
+                            child: GestureDetector(
+                              onTap: (){
+                                Get.toNamed(RouteHelper.getCartPage());
+                              },
+                              child: AppIcon(icon: Icons.circle, size: 20,
+                                iconColor: Colors.transparent,
+                                backgroundColor: AppColors.mainColor,),
+                            ),
                           ):
                               Container(),
 

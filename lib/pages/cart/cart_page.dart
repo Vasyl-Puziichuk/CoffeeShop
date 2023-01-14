@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testappfirst/home/main_page1.dart';
 import 'package:testappfirst/untils/app_constants.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/untils/dimensions.dart';
@@ -9,6 +10,7 @@ import 'package:testappfirst/widgets/small_text.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/cart_controller.dart';
+import '../../routes/route_helper.dart';
 import '../../widgets/app_icon.dart';
 
 class CartPage extends StatelessWidget {
@@ -32,10 +34,15 @@ class CartPage extends StatelessWidget {
                       iconSize: Dimensions.iconSize28,
                   ),
                   SizedBox(width: Dimensions.width20*5,),
-                  AppIcon(icon:Icons.home,
-                    iconColor: Colors.white,
-                    backgroundColor: AppColors.mainColor,
-                    iconSize: Dimensions.iconSize28,
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(RouteHelper.getInitial());
+                    },
+                    child: AppIcon(icon:Icons.home,
+                      iconColor: Colors.white,
+                      backgroundColor: AppColors.mainColor,
+                      iconSize: Dimensions.iconSize28,
+                    ),
                   ),
                   AppIcon(icon:Icons.shopping_cart,
                     iconColor: Colors.white,
@@ -92,7 +99,7 @@ class CartPage extends StatelessWidget {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              BigText(text: cartControlle.getItems[index]!.price.toString(), color: Colors.redAccent),
+                                              BigText(text: cartControlle.getItems[index].price.toString(), color: Colors.redAccent),
                                               Container(
                                                 padding: EdgeInsets.only(top: Dimensions.height10,
                                                     bottom: Dimensions.height10, left:Dimensions.width10,
