@@ -89,7 +89,7 @@ class CartPage extends StatelessWidget {
                                       var recommendedIndex=Get.find<RecommendedProductController>()
                                           .recommendedProductList
                                           .indexOf(_cartList[index].product!);
-                                      Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex));
+                                      Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex, "cartpage"));
                                     }
                                     },
                                   child: Container(
