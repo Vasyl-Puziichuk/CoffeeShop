@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testappfirst/controllers/popular_product_contr.dart';
 import 'package:testappfirst/home/main_page1.dart';
 import 'package:testappfirst/untils/app_constants.dart';
 import 'package:testappfirst/untils/colors.dart';
@@ -10,6 +13,7 @@ import 'package:testappfirst/widgets/small_text.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/cart_controller.dart';
+import '../../controllers/recommended_product_contr.dart';
 import '../../routes/route_helper.dart';
 import '../../widgets/app_icon.dart';
 
@@ -72,19 +76,36 @@ class CartPage extends StatelessWidget {
                             height: Dimensions.height20*5,
                             child: Row(
                               children: [
-                                Container(
-                                  width: Dimensions.height20*5,
-                                  height: Dimensions.height20*5,
-                                  margin: EdgeInsets.only(bottom: Dimensions.height10),
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image:NetworkImage(
-                                            AppConstants.BASE_URL+AppConstants.UPLOAD_URL+cartControlle.getItems[index].img!
-                                          )
-                                      ),
-                                      borderRadius: BorderRadius.circular(Dimensions.radius20),
-                                      color: Colors.white
+                                //контейнер з картинками товарів
+                                GestureDetector(
+                                  onTap:(){
+                                    var popularIndex=Get.find<PopularProductController>()
+                                        .popularProductList
+                                        .indexOf(_cartList[index].product!);
+                                    if(popularIndex>=0){
+                                      Get.toNamed(RouteHelper.getPopularFood(popularIndex));
+                                    }
+                                    else{
+                                      var recommendedIndex=Get.find<RecommendedProductController>()
+                                          .recommendedProductList
+                                          .indexOf(_cartList[index].product!);
+                                      Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex));
+                                    }
+                                    },
+                                  child: Container(
+                                    width: Dimensions.height20*5,
+                                    height: Dimensions.height20*5,
+                                    margin: EdgeInsets.only(bottom: Dimensions.height10),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image:NetworkImage(
+                                              AppConstants.BASE_URL+AppConstants.UPLOAD_URL+cartControlle.getItems[index].img!
+                                            )
+                                        ),
+                                        borderRadius: BorderRadius.circular(Dimensions.radius20),
+                                        color: Colors.white
+                                    ),
                                   ),
                                 ),
                                 SizedBox(width: Dimensions.width10,),
@@ -100,7 +121,7 @@ class CartPage extends StatelessWidget {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              BigText(text: cartControlle.getItems[index].price.toString(), color: Colors.redAccent),
+                                              BigText(text: '\₴ ${cartControlle.getItems[index].price.toString()}', color: Colors.redAccent),
                                               Container(
                                                 padding: EdgeInsets.only(top: Dimensions.height10,
                                                     bottom: Dimensions.height10, left:Dimensions.width10,
