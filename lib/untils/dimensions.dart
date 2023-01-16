@@ -48,4 +48,7 @@ class Dimensions{
   //Висота нижнього меню
   static double bottomHeightBar=screenHeight/7.08;
 
+  //Екран завантаження додатку
+  static double splashImg=screenHeight/3.35;
+
 }

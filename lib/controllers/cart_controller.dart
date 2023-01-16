@@ -58,7 +58,7 @@ class CartController extends GetxController{
             colorText: Colors.white,);
       }
     }
-
+    cartRepo.addToCartList(getItems);
     update();
 
   }
