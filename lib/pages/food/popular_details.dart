@@ -142,7 +142,8 @@ class PopularFoodDetail extends StatelessWidget {
           
         ],
       ),
-      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct){
+      bottomNavigationBar: GetBuilder<PopularProductController>(
+        builder: (popularProduct){
         return Container(
           height: Dimensions.bottomHeightBar,
           padding: EdgeInsets.only(top:Dimensions.height30,
