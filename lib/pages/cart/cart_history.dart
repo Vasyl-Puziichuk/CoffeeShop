@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:testappfirst/controllers/cart_controller.dart';
 import 'package:testappfirst/untils/app_constants.dart';
 import 'package:testappfirst/untils/dimensions.dart';
@@ -15,7 +16,8 @@ class CartHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var getCartHistoryList=Get.find<CartController>().getCartHistoryList();
+    var getCartHistoryList=Get.find<CartController>()
+        .getCartHistoryList().reversed.toList();
     Map<String, int> cartItemsPerOrder=Map();
 
     for(int i=0; i<getCartHistoryList.length; i++)
@@ -44,10 +46,10 @@ class CartHistory extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 100,
+            height: Dimensions.height10*10,
             color: AppColors.mainColor,
             width: double.maxFinite,
-            padding: EdgeInsets.only(top: 45),
+            padding: EdgeInsets.only(top: Dimensions.height45),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -74,12 +76,18 @@ class CartHistory extends StatelessWidget {
                     children: [
                       for(int i=0; i<itemsPerOrder.length; i++)
                         Container(
-                          height: 120,
+                          height: Dimensions.height30*4,
                           margin: EdgeInsets.only(bottom: Dimensions.height20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              BigText(text: "17/01/2023"),
+                              ((){
+                                DateTime parseDate=DateFormat("yyyy-MM-dd HH:mm:ss").parse(getCartHistoryList[listCounter].time!);
+                                var inputDate=DateTime.parse(parseDate.toString());
+                                var outputFormat=DateFormat("dd/MM/yyyy HH:mm");
+                                var outputDate=outputFormat.format(inputDate);
+                                return BigText(text: outputDate,);
+                              }()),
                               SizedBox(height: Dimensions.height10,),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,8 +99,8 @@ class CartHistory extends StatelessWidget {
                                         listCounter++;
                                       }
                                       return index<=2?Container(
-                                        height: 80,
-                                        width: 80,
+                                        height: Dimensions.height20*4.25,
+                                        width: Dimensions.height20*4.25,
                                         margin: EdgeInsets.only(right: Dimensions.width10/2),
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(Dimensions.radius15/2),
@@ -108,7 +116,7 @@ class CartHistory extends StatelessWidget {
                                   ),
                                   Container(
 
-                                    height: 80,
+                                    height: Dimensions.height20*4,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment: CrossAxisAlignment.end,
