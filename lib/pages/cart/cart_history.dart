@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:testappfirst/controllers/cart_controller.dart';
+import 'package:testappfirst/untils/app_constants.dart';
+import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/app_icon.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 
@@ -33,9 +35,9 @@ class CartHistory extends StatelessWidget {
       //}).toList();
     }
 
-    List<int> orderTimes=cartOrderTimeToList();
+    List<int> itemsPerOrder=cartOrderTimeToList();
     //print(orderTimes);
-    var saveCounter=0;
+    var listCounter=0;
     return Scaffold(
 
       body: Column(
@@ -55,7 +57,61 @@ class CartHistory extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
+          Expanded(
+              child:
+              Container(
+                margin: EdgeInsets.only(
+                top: Dimensions.height20,
+                left: Dimensions.width20,
+                right: Dimensions.width20
+                ),
+                  child: MediaQuery.removePadding(
+                    removeTop: true,
+                    context: context,
+                    child: ListView(
+                    children: [
+                      for(int i=0; i<itemsPerOrder.length; i++)
+                        Container(
+                          margin: EdgeInsets.only(bottom: Dimensions.height20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BigText(text: "17/01/2023"),
+                              SizedBox(height: Dimensions.height10,),
+                              Row(
+                                children: [
+                                  Wrap(
+                                    direction: Axis.horizontal,
+                                    children: List.generate(itemsPerOrder[i], (index){
+                                      if(listCounter<getCartHistoryList.length){
+                                        listCounter++;
+                                      }
+                                      return Container(
+                                        height: 80,
+                                        width: 80,
+                                        margin: EdgeInsets.only(right: Dimensions.width10/2),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(Dimensions.radius15/2),
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(
+                                                  AppConstants.BASE_URL+AppConstants.UPLOAD_URL+getCartHistoryList[listCounter-1].img!,
+                                                )
+                                            )
+                                        ),
+                                      );
+                                    }),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+
+                    ],
+                  ),)
+          ))
         ],
       ),
     );
