@@ -89,7 +89,14 @@ class CartPage extends StatelessWidget {
                                       var recommendedIndex=Get.find<RecommendedProductController>()
                                           .recommendedProductList
                                           .indexOf(_cartList[index].product!);
-                                      Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex, "cartpage"));
+                                      if(recommendedIndex<0){
+                                        Get.snackbar("Історія Замовлень", "Огляд продукту неможливий в історії замовлень!",
+                                          backgroundColor: AppColors.mainColor,
+                                          colorText: Colors.white,);
+                                      }
+                                      else{
+                                        Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex, "cartpage"));
+                                      }
                                     }
                                     },
                                   child: Container(

@@ -1,14 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:testappfirst/controllers/cart_controller.dart';
+import 'package:testappfirst/routes/route_helper.dart';
 import 'package:testappfirst/untils/app_constants.dart';
 import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/app_icon.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 import 'package:testappfirst/widgets/small_text.dart';
 
+import '../../models/cart_model.dart';
 import '../../untils/colors.dart';
 
 class CartHistory extends StatelessWidget {
@@ -30,15 +34,20 @@ class CartHistory extends StatelessWidget {
       }
     }
 
-    List<int> cartOrderTimeToList(){
+    List<int> cartItemsPerOrderToList(){
       return cartItemsPerOrder.entries.map((e)=>e.value).toList();
       //return cartItemsPerOrder.entries.map((e){
       // return e.value;
-
+      //}).toList();
+    }
+    List<String> cartOrderTimeToList(){
+      return cartItemsPerOrder.entries.map((e)=>e.key).toList();
+      //return cartItemsPerOrder.entries.map((e){
+      // return e.value;
       //}).toList();
     }
 
-    List<int> itemsPerOrder=cartOrderTimeToList();
+    List<int> itemsPerOrder=cartItemsPerOrderToList();
     //print(orderTimes);
     var listCounter=0;
     return Scaffold(
@@ -125,15 +134,31 @@ class CartHistory extends StatelessWidget {
                                         BigText(
                                           text: itemsPerOrder[i].toString()+" Items",
                                           color: AppColors.titleColor,),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(horizontal: Dimensions.width10,
-                                          vertical: Dimensions.height10/2),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(Dimensions.radius15/3),
-                                            border: Border.all(width: 1, color: AppColors.mainColor),
+                                        GestureDetector(
+                                          onTap: (){
+                                            var orderTime=cartOrderTimeToList();
+                                            Map<int, CartModel> moreOrder={};
+                                            for(int j=0;  j<getCartHistoryList.length; j++){
+                                              if(getCartHistoryList[j].time==orderTime[i]){
+                                                moreOrder.putIfAbsent(getCartHistoryList[j].id!, () =>
+                                                  CartModel.fromJson(jsonDecode(jsonEncode(getCartHistoryList[j])))
+                                                );
+                                              }
+                                            }
+                                            Get.find<CartController>().setItems = moreOrder;
+                                            Get.find<CartController>().addToCartList();
+                                            Get.toNamed(RouteHelper.getCartPage());
+                                        },
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(horizontal: Dimensions.width10,
+                                                vertical: Dimensions.height10/2),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(Dimensions.radius15/3),
+                                              border: Border.all(width: 1, color: AppColors.mainColor),
 
+                                            ),
+                                            child: SmallText(text: "Більше", color: AppColors.mainColor,),
                                           ),
-                                          child: SmallText(text: "one more", color: AppColors.mainColor,),
                                         )
                                       ],
                                     ),
