@@ -12,6 +12,7 @@ import 'package:testappfirst/widgets/app_icon.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 import 'package:testappfirst/widgets/small_text.dart';
 
+import '../../base/no_data_page.dart';
 import '../../models/cart_model.dart';
 import '../../untils/colors.dart';
 
@@ -50,10 +51,21 @@ class CartHistory extends StatelessWidget {
     List<int> itemsPerOrder=cartItemsPerOrderToList();
     //print(orderTimes);
     var listCounter=0;
+    Widget timeWidget(int index){
+      var outputDate = DateTime.now().toString();
+      if(index<getCartHistoryList.length){
+        DateTime parseDate=DateFormat("yyyy-MM-dd HH:mm:ss").parse(getCartHistoryList[listCounter].time!);
+        var inputDate=DateTime.parse(parseDate.toString());
+        var outputFormat=DateFormat("dd/MM/yyyy HH:mm");
+        outputDate=outputFormat.format(inputDate);
+      }
+      return BigText(text: outputDate,);
+    }
     return Scaffold(
 
       body: Column(
         children: [
+          //header and app bar
           Container(
             height: Dimensions.height10*10,
             color: AppColors.mainColor,
@@ -70,18 +82,19 @@ class CartHistory extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-              child:
-              Container(
+          //body
+          GetBuilder<CartController>(builder: (_cartController){
+            return _cartController.getCartHistoryList().length>0?
+            Expanded(child: Container(
                 margin: EdgeInsets.only(
-                top: Dimensions.height20,
-                left: Dimensions.width20,
-                right: Dimensions.width20
+                    top: Dimensions.height20,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20
                 ),
-                  child: MediaQuery.removePadding(
-                    removeTop: true,
-                    context: context,
-                    child: ListView(
+                child: MediaQuery.removePadding(
+                  removeTop: true,
+                  context: context,
+                  child: ListView(
                     children: [
                       for(int i=0; i<itemsPerOrder.length; i++)
                         Container(
@@ -90,13 +103,7 @@ class CartHistory extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ((){
-                                DateTime parseDate=DateFormat("yyyy-MM-dd HH:mm:ss").parse(getCartHistoryList[listCounter].time!);
-                                var inputDate=DateTime.parse(parseDate.toString());
-                                var outputFormat=DateFormat("dd/MM/yyyy HH:mm");
-                                var outputDate=outputFormat.format(inputDate);
-                                return BigText(text: outputDate,);
-                              }()),
+                              timeWidget(listCounter),
                               SizedBox(height: Dimensions.height10,),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,14 +148,14 @@ class CartHistory extends StatelessWidget {
                                             for(int j=0;  j<getCartHistoryList.length; j++){
                                               if(getCartHistoryList[j].time==orderTime[i]){
                                                 moreOrder.putIfAbsent(getCartHistoryList[j].id!, () =>
-                                                  CartModel.fromJson(jsonDecode(jsonEncode(getCartHistoryList[j])))
+                                                    CartModel.fromJson(jsonDecode(jsonEncode(getCartHistoryList[j])))
                                                 );
                                               }
                                             }
                                             Get.find<CartController>().setItems = moreOrder;
                                             Get.find<CartController>().addToCartList();
                                             Get.toNamed(RouteHelper.getCartPage());
-                                        },
+                                          },
                                           child: Container(
                                             padding: EdgeInsets.symmetric(horizontal: Dimensions.width10,
                                                 vertical: Dimensions.height10/2),
@@ -171,7 +178,15 @@ class CartHistory extends StatelessWidget {
 
                     ],
                   ),)
-          ))
+            ))
+                :SizedBox(
+                    height: MediaQuery.of(context).size.height/1.25,
+                    child: const Center(
+                      child: NoDataPage(
+                        text: "Ви поки нічого не купували!",
+                        imgPath: "assets/image/empty-box.png",),
+                    ));
+          })
         ],
       ),
     );
