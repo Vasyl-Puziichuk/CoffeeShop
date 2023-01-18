@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:testappfirst/base/show_custom_snack_bar.dart';
+import 'package:testappfirst/models/signup_body_model.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
@@ -50,6 +51,11 @@ class SingUpPage extends StatelessWidget {
       }
       else{
         showCustomSnackBar("Все добре пройшло", title: "Чудово!");
+        SignUpBody signUpBody = SignUpBody(name: name,
+            phone: phone,
+            email: email,
+            password: password);
+        print(signUpBody.toString());
       }
     }
 
