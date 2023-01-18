@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:testappfirst/controllers/cart_controller.dart';
 import 'package:testappfirst/controllers/popular_product_contr.dart';
 import 'package:testappfirst/home/main_page1.dart';
+import 'package:testappfirst/pages/auth/sing_up_page.dart';
 import 'package:testappfirst/pages/cart/cart_page.dart';
 import 'package:testappfirst/pages/food/popular_details.dart';
 import 'package:testappfirst/pages/food/recommended_food_details.dart';
@@ -28,12 +29,13 @@ class MyApp extends StatelessWidget {
     Get.find<CartController>().getCartData();
     return GetBuilder<PopularProductController>(builder: (_){
       return GetBuilder<RecommendedProductController>(builder: (_){
-        return GetMaterialApp(
+        return const GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
+            home: SingUpPage(),
           //home: SplashScreen(),
-          initialRoute: RouteHelper.getSplashPage(),
-          getPages: RouteHelper.routes,
+          //initialRoute: RouteHelper.getSplashPage(),
+          //getPages: RouteHelper.routes,
         );
       });
     });
