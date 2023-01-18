@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:testappfirst/pages/account/account_page.dart';
+import 'package:testappfirst/pages/auth/sing_up_page.dart';
 import 'package:testappfirst/pages/cart/cart_history.dart';
 //import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:testappfirst/untils/colors.dart';
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   List pages=[
     MainFoodPage(),
-    Container(child: Center(child: Text("Next 2 page"))),
+    SingUpPage(),
     CartHistory(),
     AccountPage(),
 
