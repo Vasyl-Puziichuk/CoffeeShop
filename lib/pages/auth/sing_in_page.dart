@@ -73,7 +73,8 @@ class SingInPage extends StatelessWidget {
             AppTextField(
                 textController: passwordController,
                 hintText: "Пароль",
-                icon: Icons.password_sharp),
+                icon: Icons.password_sharp,
+                isObscure: true,),
 
             SizedBox(height: Dimensions.height20,),
             //існуючий акаунт
