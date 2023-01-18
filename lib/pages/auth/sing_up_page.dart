@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:testappfirst/base/show_custom_snack_bar.dart';
+import 'package:testappfirst/controllers/auth_controller.dart';
 import 'package:testappfirst/models/signup_body_model.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/untils/dimensions.dart';
@@ -26,6 +27,7 @@ class SingUpPage extends StatelessWidget {
     ];
 
     void _registration(){
+      var authController = Get.find<AuthController>();
       String name=nameController.text.trim();
       String phone=phoneController.text.trim();
       String email=emailController.text.trim();
@@ -55,7 +57,15 @@ class SingUpPage extends StatelessWidget {
             phone: phone,
             email: email,
             password: password);
-        print(signUpBody.toString());
+
+        authController.registration(signUpBody).then((status){
+          if(status.isSuccess){
+            print("Success regestration");
+          }
+          else{
+            showCustomSnackBar(status.message);
+          }
+        });
       }
     }
 
