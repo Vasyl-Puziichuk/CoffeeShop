@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:testappfirst/base/show_custom_snack_bar.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
@@ -21,9 +22,36 @@ class SingUpPage extends StatelessWidget {
       "face.png",
       "goog.png",
       "twit.png",
-
-
     ];
+
+    void _registration(){
+      String name=nameController.text.trim();
+      String phone=phoneController.text.trim();
+      String email=emailController.text.trim();
+      String password=passwordController.text.trim();
+
+      if(name.isEmpty){
+        showCustomSnackBar("Введіть своє ім'я", title: "Ім'я");
+      }
+      else if(phone.isEmpty){
+        showCustomSnackBar("Введіть свій номер телефону", title: "Номер телефону");
+      }
+      else if(email.isEmpty){
+        showCustomSnackBar("Введіть свою електрону пошту", title: "Електрона пошта");
+      }
+      else if(!GetUtils.isEmail(email)){
+        showCustomSnackBar("Введіть дійсну електрону пошту", title: "Дійсна електрона пошта");
+      }
+      else if(password.isEmpty){
+        showCustomSnackBar("Введіть свій пароль", title: "Пароль");
+      }
+      else if(password.length<6){
+        showCustomSnackBar("Пароль має бути більше шести символів", title: "Пароль");
+      }
+      else{
+        showCustomSnackBar("Все добре пройшло", title: "Чудово!");
+      }
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -70,18 +98,23 @@ class SingUpPage extends StatelessWidget {
                 icon: Icons.phone_android_sharp),
             SizedBox(height: Dimensions.height20+Dimensions.height20,),
             //кнопка реєстрації
-            Container(
-              width: Dimensions.screenWidth/2,
-              height: Dimensions.screenHeight/12.5,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
-                color: AppColors.mainColor
-              ),
-              child: Center(
-                child: BigText(
-                    text: "Доєднатися",
-                  size: Dimensions.font20+Dimensions.font20/2,
-                  color: Colors.white,
+            GestureDetector(
+              onTap: (){
+                _registration();
+              },
+              child: Container(
+                width: Dimensions.screenWidth/2,
+                height: Dimensions.screenHeight/12.5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius30),
+                  color: AppColors.mainColor
+                ),
+                child: Center(
+                  child: BigText(
+                      text: "Доєднатися",
+                    size: Dimensions.font20+Dimensions.font20/2,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -125,5 +158,7 @@ class SingUpPage extends StatelessWidget {
         ),
       ),
     );
+
+
   }
 }
