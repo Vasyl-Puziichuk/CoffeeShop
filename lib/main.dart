@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:testappfirst/controllers/cart_controller.dart';
 import 'package:testappfirst/controllers/popular_product_contr.dart';
 import 'package:testappfirst/home/main_page1.dart';
+import 'package:testappfirst/pages/auth/sing_in_page.dart';
 import 'package:testappfirst/pages/auth/sing_up_page.dart';
 import 'package:testappfirst/pages/cart/cart_page.dart';
 import 'package:testappfirst/pages/food/popular_details.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         return const GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-            home: SingUpPage(),
+            home: SingInPage(),
           //home: SplashScreen(),
           //initialRoute: RouteHelper.getSplashPage(),
           //getPages: RouteHelper.routes,
