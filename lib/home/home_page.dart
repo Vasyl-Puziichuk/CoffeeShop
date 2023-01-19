@@ -7,6 +7,7 @@ import 'package:testappfirst/pages/cart/cart_history.dart';
 import 'package:testappfirst/untils/colors.dart';
 
 
+import '../pages/auth/sing_in_page.dart';
 import 'main_page1.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,7 +23,10 @@ class _HomePageState extends State<HomePage> {
 
   List pages=[
     MainFoodPage(),
-    SingUpPage(),
+    Container(
+      child: Text("Історія"),
+
+    ),
     CartHistory(),
     AccountPage(),
 

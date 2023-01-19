@@ -14,8 +14,8 @@ import '../../models/signup_body_model.dart';
 import '../../routes/route_helper.dart';
 import '../../widgets/app_text_field.dart';
 
-class SingInPage extends StatelessWidget {
-  const SingInPage({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,7 @@ class SingInPage extends StatelessWidget {
         authController.login(email, password).then((status){
           if(status.isSuccess){
             Get.toNamed(RouteHelper.getInitial());
+            //Get.toNamed(RouteHelper.getCartPage());
             //print("Success login");
           }
           else{
@@ -161,7 +162,7 @@ class SingInPage extends StatelessWidget {
                       children: [
                         TextSpan(
                             recognizer: TapGestureRecognizer()..onTap=()=>
-                                Get.to(()=>SingUpPage(),
+                                Get.to(()=>SignUpPage(),
                                     transition: Transition.fadeIn),
                             text: " Створити",
                             style: TextStyle(
@@ -176,7 +177,7 @@ class SingInPage extends StatelessWidget {
             ],
           ),
         )
-            :CustomLoader();
+            :const CustomLoader();
       }),
     );
   }

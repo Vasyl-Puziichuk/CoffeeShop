@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:testappfirst/controllers/auth_controller.dart';
+import 'package:testappfirst/controllers/cart_controller.dart';
 import 'package:testappfirst/untils/colors.dart';
 import 'package:testappfirst/widgets/app_icon.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 
+import '../../routes/route_helper.dart';
 import '../../untils/dimensions.dart';
 import '../../widgets/account_widget.dart';
 
@@ -15,8 +20,10 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColor,
-        title:  BigText(
-          text: "Профіль", size: 24, color: Colors.white,
+        title:  Center(
+          child: BigText(
+            text: "Профіль", size: 24, color: Colors.white,
+          ),
         ),
         ),
 
@@ -97,33 +104,34 @@ class AccountPage extends StatelessWidget {
                         iconSize: Dimensions.height10*5/2,
                         size: Dimensions.height10*5,
                       ),
-                      bigText: BigText(text: "Vasyl"),
+                      bigText: BigText(text: "Повідомлення"),
                     ),
                     SizedBox(height: Dimensions.height20,),
-                    //повідомлення
-                    AccountWidget(
-                      appIcon: AppIcon(
-                        icon: Icons.message,
-                        backgroundColor: Colors.redAccent,
-                        iconColor: Colors.white,
-                        iconSize: Dimensions.height10*5/2,
-                        size: Dimensions.height10*5,
+                    //вихід
+                    GestureDetector(
+                      onTap: (){
+                       if(Get.find<AuthController>().userLoggedIn()){
+                         Get.find<AuthController>().clearSharedData();
+                         Get.find<CartController>().clear();
+                         Get.find<CartController>().clearCartHistory();
+                         Get.offNamed(RouteHelper.getSignUpPage());
+                       }
+
+
+                      },
+                      child: AccountWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.logout,
+                          backgroundColor: Colors.redAccent,
+                          iconColor: Colors.white,
+                          iconSize: Dimensions.height10*5/2,
+                          size: Dimensions.height10*5,
+                        ),
+                        bigText: BigText(text: "Вихід"),
                       ),
-                      bigText: BigText(text: "Vasyl"),
                     ),
                     SizedBox(height: Dimensions.height20,),
-                    //повідомлення
-                    AccountWidget(
-                      appIcon: AppIcon(
-                        icon: Icons.message,
-                        backgroundColor: Colors.redAccent,
-                        iconColor: Colors.white,
-                        iconSize: Dimensions.height10*5/2,
-                        size: Dimensions.height10*5,
-                      ),
-                      bigText: BigText(text: "Vasyl"),
-                    ),
-                    SizedBox(height: Dimensions.height20,),
+
                   ],
                 ),
               ),

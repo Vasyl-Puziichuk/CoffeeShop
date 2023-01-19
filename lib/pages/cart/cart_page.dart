@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testappfirst/controllers/auth_controller.dart';
 import 'package:testappfirst/controllers/popular_product_contr.dart';
 import 'package:testappfirst/home/main_page1.dart';
 import 'package:testappfirst/untils/app_constants.dart';
@@ -215,9 +216,13 @@ class CartPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      //popularProduct.addItem(product);
-                      print("Tap Tap");
-                      cartController.addToHistory();
+                      if(Get.find<AuthController>().userLoggedIn()) {
+                        print("Tap Tap");
+                        cartController.addToHistory();
+                      }
+                      else{
+                        Get.toNamed(RouteHelper.getSignUpPage());
+                      }
                     },
                     child: Container(
                       padding: EdgeInsets.only(top: Dimensions.height20,

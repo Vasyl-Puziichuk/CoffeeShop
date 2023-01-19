@@ -12,8 +12,8 @@ import 'package:testappfirst/widgets/big_taxt.dart';
 import '../../base/custom_loader.dart';
 import '../../widgets/app_text_field.dart';
 
-class SingUpPage extends StatelessWidget {
-  const SingUpPage({Key? key}) : super(key: key);
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
