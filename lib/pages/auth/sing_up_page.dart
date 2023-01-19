@@ -63,6 +63,7 @@ class SignUpPage extends StatelessWidget {
         authController.registration(signUpBody).then((status){
           if(status.isSuccess){
             print("Success regestration");
+            Get.toNamed(RouteHelper.getInitial());
           }
           else{
             showCustomSnackBar(status.message);
