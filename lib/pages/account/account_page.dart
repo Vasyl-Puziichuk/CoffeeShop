@@ -116,6 +116,9 @@ class AccountPage extends StatelessWidget {
                          Get.find<CartController>().clearCartHistory();
                          Get.offNamed(RouteHelper.getSignUpPage());
                        }
+                       else{
+                         print("you logged out");
+                       }
 
 
                       },

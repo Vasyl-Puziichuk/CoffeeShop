@@ -10,6 +10,7 @@ import 'package:testappfirst/untils/dimensions.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 
 import '../../base/custom_loader.dart';
+import '../../routes/route_helper.dart';
 import '../../widgets/app_text_field.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -120,6 +121,7 @@ class SignUpPage extends StatelessWidget {
               GestureDetector(
                 onTap: (){
                   _registration(_authCController);
+                  Get.offNamed(RouteHelper.getInitial());
                 },
                 child: Container(
                   width: Dimensions.screenWidth/2,

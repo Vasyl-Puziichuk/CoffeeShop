@@ -20,7 +20,7 @@ class AuthController extends GetxController implements GetxService{
     if(response.statusCode==200){
       print("Backend token");
         authRepo.saveUserToken(response.body["token"]);
-      //print(response.body["token"].toString());
+      print(response.body["token"].toString());
         responseModel=ResponseModel(true, response.body["token"]);
     }
     else{
@@ -42,6 +42,7 @@ class AuthController extends GetxController implements GetxService{
     if(response.statusCode == 200){
       print("Backend token");
       authRepo.saveUserToken(response.body["token"]);
+      print("My token is "+ response.body["token"]);
       responseModel=ResponseModel(true, response.body["token"]);
     }
     else{
