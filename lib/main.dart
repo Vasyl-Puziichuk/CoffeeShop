@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
     Get.find<CartController>().getCartData();
     return GetBuilder<PopularProductController>(builder: (_){
       return GetBuilder<RecommendedProductController>(builder: (_){
-        return  GetMaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-            //home: SingInPage(),
+            //home: SignInPage(),
           //home: SplashScreen(),
          initialRoute: RouteHelper.getSplashPage(),
           getPages: RouteHelper.routes,
