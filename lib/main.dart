@@ -11,6 +11,7 @@ import 'package:testappfirst/pages/food/popular_details.dart';
 import 'package:testappfirst/pages/food/recommended_food_details.dart';
 import 'package:testappfirst/pages/splash/splash_page.dart';
 import 'package:testappfirst/routes/route_helper.dart';
+import 'package:testappfirst/untils/colors.dart';
 import 'controllers/recommended_product_contr.dart';
 import 'helper/dependencies.dart' as dep;
 import 'home/page_body1.dart';
@@ -37,6 +38,10 @@ class MyApp extends StatelessWidget {
           //home: SplashScreen(),
          initialRoute: RouteHelper.getSplashPage(),
           getPages: RouteHelper.routes,
+            theme: ThemeData(
+            primaryColor: AppColors.mainColor,
+            fontFamily: "Lato",
+          ),
         );
       });
     });
