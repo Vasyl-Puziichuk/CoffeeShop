@@ -10,6 +10,7 @@ import 'package:testappfirst/widgets/app_icon.dart';
 import 'package:testappfirst/widgets/big_taxt.dart';
 
 import '../../base/custom_loader.dart';
+import '../../controllers/location_controller.dart';
 import '../../routes/route_helper.dart';
 import '../../untils/dimensions.dart';
 import '../../widgets/account_widget.dart';
@@ -92,16 +93,42 @@ class AccountPage extends StatelessWidget {
                       ),
                       SizedBox(height: Dimensions.height20,),
                       //адреса
-                      AccountWidget(
-                        appIcon: AppIcon(
-                          icon: Icons.location_on,
-                          backgroundColor: AppColors.yellowColor,
-                          iconColor: Colors.white,
-                          iconSize: Dimensions.height10*5/2,
-                          size: Dimensions.height10*5,
-                        ),
-                        bigText: BigText(text: "Введіть свою адресу"),
-                      ),
+                      GetBuilder<LocationController>(builder: (locationController){
+                        if(_userLoggedIn&&locationController.addressList.isEmpty){
+                          return GestureDetector(
+                            onTap: (){
+                              Get.offNamed(RouteHelper.getAddressPage());
+                            },
+                            child: AccountWidget(
+                              appIcon: AppIcon(
+                                icon: Icons.location_on,
+                                backgroundColor: AppColors.yellowColor,
+                                iconColor: Colors.white,
+                                iconSize: Dimensions.height10*5/2,
+                                size: Dimensions.height10*5,
+                              ),
+                              bigText: BigText(text: "Введіть свою адресу"),
+                            ),
+                          );
+                        }
+                        else{
+                          return GestureDetector(
+                            onTap: (){
+                              Get.offNamed(RouteHelper.getAddressPage());
+                            },
+                            child: AccountWidget(
+                              appIcon: AppIcon(
+                                icon: Icons.location_on,
+                                backgroundColor: AppColors.yellowColor,
+                                iconColor: Colors.white,
+                                iconSize: Dimensions.height10*5/2,
+                                size: Dimensions.height10*5,
+                              ),
+                              bigText: BigText(text: "Ваша адреса"),
+                            ),
+                          );
+                        }
+                      }),
                       SizedBox(height: Dimensions.height20,),
                       //повідомлення
                       AccountWidget(
@@ -122,7 +149,8 @@ class AccountPage extends StatelessWidget {
                             Get.find<AuthController>().clearSharedData();
                             Get.find<CartController>().clear();
                             Get.find<CartController>().clearCartHistory();
-                            Get.offNamed(RouteHelper.getSignUpPage());
+                            Get.find<LocationController>().clearAddressList();
+                            Get.offNamed(RouteHelper.getSignInPage());
                           }
                           else{
                             print("you logged out");
@@ -175,7 +203,7 @@ class AccountPage extends StatelessWidget {
             SizedBox(height: Dimensions.height15,),
             GestureDetector(
               onTap: (){
-                Get.toNamed(RouteHelper.getSignUpPage());
+                Get.toNamed(RouteHelper.getSignInPage());
               },
               child: Container(
 

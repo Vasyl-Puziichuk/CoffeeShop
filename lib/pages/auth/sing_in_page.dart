@@ -19,18 +19,19 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var emailController=TextEditingController();
+    var phoneController=TextEditingController();
     var passwordController=TextEditingController();
     void _login(AuthController authController){
-      String email=emailController.text.trim();
+
+      String phone=phoneController.text.trim();
       String password=passwordController.text.trim();
 
-      if(email.isEmpty){
-        showCustomSnackBar("Введіть свою електрону пошту", title: "Електрона пошта");
+      if(phone.isEmpty){
+        showCustomSnackBar("Введіть свій номер телефону", title: "Телефон");
       }
-      else if(!GetUtils.isEmail(email)){
+      /*else if(!GetUtils.isEmail(phone)){
         showCustomSnackBar("Введіть дійсну електрону пошту", title: "Дійсна електрона пошта");
-      }
+      }*/
       else if(password.isEmpty){
         showCustomSnackBar("Введіть свій пароль", title: "Пароль");
       }
@@ -40,7 +41,7 @@ class SignInPage extends StatelessWidget {
       else{
 
         //showCustomSnackBar("Все добре пройшло", title: "Чудово");
-        authController.login(email, password).then((status){
+        authController.login(phone, password).then((status){
           if(status.isSuccess){
             Get.toNamed(RouteHelper.getInitial());
             //Get.toNamed(RouteHelper.getCartPage());
@@ -100,8 +101,8 @@ class SignInPage extends StatelessWidget {
               SizedBox(height: Dimensions.height20,),
               //email
               AppTextField(
-                  textController: emailController,
-                  hintText: "Email...",
+                  textController: phoneController,
+                  hintText: "Телефон",
                   icon: Icons.email),
               SizedBox(height: Dimensions.height20,),
               //пароль

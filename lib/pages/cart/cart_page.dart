@@ -224,9 +224,12 @@ class CartPage extends StatelessWidget {
                         if(Get.find<LocationController>().addressList.isEmpty){
                           Get.toNamed(RouteHelper.getAddressPage());
                         }
+                        else{
+                          Get.offNamed(RouteHelper.getInitial());
+                        }
                       }
                       else{
-                        Get.toNamed(RouteHelper.getSignUpPage());
+                        Get.toNamed(RouteHelper.getSignInPage());
                       }
                     },
                     child: Container(

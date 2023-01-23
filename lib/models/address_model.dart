@@ -20,9 +20,9 @@ class AddressModel{
     _addressType=addressType;
     _contactPersonName=contactPersonName;
     _contactPersonNumber=contactPersonNumber;
-    _address=address;
-    _latitude=latitude;
     _longitude=longitude;
+    _latitude=latitude;
+    _address=address;
   }
   String get address=>_address;
   String get addressType=>_addressType;
@@ -36,8 +36,20 @@ class AddressModel{
     _addressType=json['address_type']??"";
     _contactPersonNumber=json["contact_person_number"]??"";
     _contactPersonName=json["contact_person_name"]??"";
-    _address=json["_address"];
     _latitude=json["latitude"];
     _longitude=json["longitude"];
+    _address=json["address"];
+  }
+
+  Map<String, dynamic> toJson(){
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id']=this._id;
+    data['address_type']=this._addressType;
+    data['contact_person_number']=this._contactPersonNumber;
+    data['contact_person_name']=this._contactPersonName;
+    data['address']=this._address;
+    data['longitude']=this._longitude;
+    data['latitude']=this._latitude;
+    return data;
   }
 }
