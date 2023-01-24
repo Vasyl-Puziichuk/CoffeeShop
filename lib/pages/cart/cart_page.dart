@@ -226,6 +226,7 @@ class CartPage extends StatelessWidget {
                         }
                         else{
                           Get.offNamed(RouteHelper.getInitial());
+                          //cartController.addToHistory();
                         }
                       }
                       else{

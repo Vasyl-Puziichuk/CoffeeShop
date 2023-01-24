@@ -114,6 +114,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                  shrinkWrap: true,
                  itemCount: recommendedProduct.recommendedProductList.length,
                  itemBuilder: (context, index){
+                   //var product=Get.find<PopularProductController>().popularProductList[pageId];
+                   //Get.find<PopularProductController>().initProduct(product,Get.find<CartController>());
                    return GestureDetector(
                      onTap: (){
                        Get.toNamed(RouteHelper.getRecommendedFood(index, "home"));

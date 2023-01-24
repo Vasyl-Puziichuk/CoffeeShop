@@ -32,7 +32,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
        target: LatLng(
        //45.508800, -122.624189
      50.258151, 28.664383
-  ), zoom: 15);
+  ), zoom: 18);
   late LatLng _initialPosition = LatLng(
       //45.508800, -122.624189
       50.258151, 28.664383
@@ -92,7 +92,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 140,
+                  height: 150,
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
                   decoration: BoxDecoration(
@@ -105,7 +105,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   child: Stack(
                     children: [
                       GoogleMap(initialCameraPosition:
-                      CameraPosition(target: _initialPosition, zoom: 15),
+                      CameraPosition(target: _initialPosition, zoom: 18),
                           onTap: (latlng){
                               Get.toNamed(RouteHelper.getPickAddressPage(),
                                 arguments: PickAddressMap(
